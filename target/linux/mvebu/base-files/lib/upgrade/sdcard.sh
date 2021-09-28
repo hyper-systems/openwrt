@@ -15,7 +15,7 @@ platform_check_image_sdcard() {
 	get_partitions /tmp/image.bs image
 
 	#compare tables
-	diff="$(grep -F -x -v -f /tmp/partmap.bootdisk /tmp/partmap.image)"
+	diff="$(cmp /tmp/partmap.bootdisk /tmp/partmap.image 2>&1)"
 
 	rm -f /tmp/image.bs /tmp/partmap.bootdisk /tmp/partmap.image
 
@@ -46,7 +46,7 @@ platform_do_upgrade_sdcard() {
 		get_partitions /tmp/image.bs image
 
 		#compare tables
-		diff="$(grep -F -x -v -f /tmp/partmap.bootdisk /tmp/partmap.image)"
+		diff="$(cmp /tmp/partmap.bootdisk /tmp/partmap.image 2>&1)"
 	else
 		diff=1
 	fi
